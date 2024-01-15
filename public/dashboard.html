@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <title>Inventory Xpress</title>
+      <meta charset="UTF-8">
+      <meta name = "description" content="Inventory Xpress">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+      <!-- <link rel="stylesheet" href="css/all.min.css">  dont exist -->
+      <link rel="stylesheet" href="css/bootstrap.min.css">
+      <link rel="stylesheet" href="css/test.css">
+   </head>
+   <body>
+
+      <header class="container pt-4 pb-3">
+         <h1 class="fs-2 fw-bold">Inventory Xpress</h1>
+      </header>
+
+      <div class="line w-100 mt-2 mb-3"></div>
+      <div class="container">
+         <p>Go back to <a href="/public/index.html">Home</a></p>
+      </div>
+
+      <section class="container">
+         <div class="bg-body py-5 text-center">
+            <h2 class="fs-3 fw-bold text-decoration-underline mb-5">Data of Products..</h2>
+
+            <input  id="pName" type="text"  placeholder="Product Name.." class="form-control mb-2 w-75 mx-auto">
+            <div id="alertName" class="alert alert-danger p-2 w-75 mx-auto d-none">Should be consisting of a statement consists of a capital letter and 2-10 small letters...</div>
+
+            <input  id="pPrice" type="number"  placeholder="Product Price.." class="form-control mb-2 w-75 mx-auto">
+            <div id="alertPrice" class="alert alert-danger p-2 w-75 mx-auto d-none">Should be in range from 50-10000 $...</div>
+
+            <input  id="pCat" type="text"  placeholder="Product Category.." class="form-control mb-2 w-75 mx-auto">
+            <div id="alertCate" class="alert alert-danger p-2 w-75 mx-auto d-none">Should be same Product Name...</div>
+
+            <input id="pQuant" type="number" placeholder="Product Quantity.." class="form-control mb-2 w-75 mx-auto">
+            <div id="alertQuant" class="alert alert-danger p-2 w-75 mx-auto d-none">Quantity should be a positive integer...</div>
+
+            
+            <textarea  id="pDesc" placeholder="Product Description.." class="form-control mb-2 w-75 mx-auto"></textarea>
+
+
+            <div class="buttons w-75 mx-auto">
+               <div class="row g-0">
+                  <div class="col-6 text-start">
+                     <button class="btn btn-primary mt-3 p-2" id="updateBtn">Update Product</button>
+                  </div>
+                  <div class="col-6 text-end">
+                     <button class="btn btn-primary mt-3 me-2 p-2" id="resetBtn">Reset Form</button>
+                     <button class="btn btn-primary mt-3 p-2" id="addBtn">Add Product</button>
+                  </div>
+               </div>
+            </div>
+
+            <div class="w-75 mx-auto">
+               <table class="table table-striped mt-4 text-center">
+                  <thead>
+                     <th>index</th>
+                     <th>Product Name</th>
+                     <th>Product Price</th>
+                     <th>Product Category</th>
+                     <th>Product Description</th>
+                     <th>Product Quantity</th>
+                     <th>Update</th>
+                     <th>Delete</th>
+                  </thead>
+                  <tbody id="myTable">
+
+                  </tbody>
+               </table>
+            </div>
+         </div>
+      </section>
+
+      <div class="line w-100 my-3"></div>
+
+      <footer class="container py-3 text-center">
+         <h3 class="fs-6 fw-bold">&copy; 2023 Inventory Xpress</h3>
+      <!--Authors Information-->
+   <div class="authors">
+      <p>Authors:</p>
+         <p><a href="https://github.com/Dedeyd70" target="_blank">Dorothy Dede Quao (Dedeyd70)</a></p>
+         <p><a href="https://github.com/TrudyB-T" target="_blank">Trudy Bannerman (TrudyB-T)</a></p>
+         <p><a href="https://github.com/Im-adom" target="_blank">Grace Amaning Kwarteng (Im-adom)</a></p>
+   </div>   
+   <div class="container">
+      <p>Go back to <a href="/public/index.html">Home</a></p>
+  </div>
+
+   </footer>
+
+      <script src="js/bootstrap.bundle.min.js"></script>
+      <script src="js/main.js"></script>
+   </body>
+</html>

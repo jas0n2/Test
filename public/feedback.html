@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <title>Inventory Xpress</title>
+      <!-- ... (existing head content) ... -->
+      <style>
+         /* Add this style block or include in your existing CSS file */
+
+         /* Feedback Section Styling */
+         .feedback-section {
+            background-color: beige;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+            margin-right: 10%;
+         }
+
+         /* Feedback Title Styling */
+         .feedback-title {
+            color: sienna;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+         }
+
+         /* Feedback Message Styling */
+         .feedback-message {
+            color: #333; /* Dark text color for better readability */
+            font-size: 16px;
+            line-height: 1.5;
+         }
+
+         /* Feedback Form Styling */
+         .feedback-form {
+            margin-top: 20px;
+         }
+
+         /* Feedback Textarea Styling */
+         .feedback-textarea {
+            width: 80%;
+            padding: 10px;
+            margin-top: 20px;
+            margin-left: 0.5%;
+            margin-right: 100%;
+            border: 1px solid sienna;
+            border-radius: 5px;
+            resize: vertical;
+            height: 120px;
+         }
+
+         /* Feedback Submit Button Styling */
+         .feedback-submit-btn {
+            background-color: sienna;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 10%;
+            margin-top: 1%;
+            margin-left: 72% ;
+            margin-right:100%;
+         }
+
+         .label{
+            margin-top: 50%;
+         }         
+      </style>
+   </head>
+   <body>
+      <!-- Feedback Section -->
+      <section class="feedback-section" action="feedback.php" method="post">
+         <div class="feedback-title">User Feedback</div>
+         <div class="feedback-message">
+            <p>Thank you for using Inventory Xpress! Your feedback is important to us.</p>
+            <p>We appreciate your suggestions and comments as we continue to improve our services.</p>
+         </div>
+      </section>
+
+      <section>
+        <form class="feedback-form" >
+            <label for="userFeedback">Your Feedback:</label>
+            <textarea id="userFeedback" class="feedback-textarea" rows="4" placeholder="Type your feedback here..."></textarea>
+            <button type="submit" class="feedback-submit-btn">Submit Feedback</button>
+         </form>
+         <a href="index.html">Go Back to Home</a>
+      </section>
+   </body>
+</html>

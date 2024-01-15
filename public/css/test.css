@@ -1,0 +1,52 @@
+
+body{
+    background-color: rgb(173, 139, 116);
+}
+.bg-body{
+    background-image: ;
+}
+h1 , h3{
+    color: #ccc;
+}
+.line{
+    height: 0.05rem;
+    background-color: #ccc;
+}
+/* Styles for small screens (phones) */
+@media only screen and (max-width: 600px) {
+    /* Your styles for small screens go here */
+}
+
+/* Styles for medium screens (tablets) */
+@media only screen and (min-width: 601px) and (max-width: 1024px) {
+    /* Your styles for medium screens go here */
+}
+
+/* Styles for large screens (laptops) */
+@media only screen and (min-width: 1025px) and (max-width: 1440px) {
+    .table {
+        width: 100% !important;
+        /* margin: auto !important; */
+    }
+}
+
+/* Styles for extra-large screens (desktops) */
+@media only screen and (min-width: 1441px) {
+    .table {
+        width: 100% !important;
+        /* margin: auto !important; */
+    }
+}
+
+.btn-primary {
+    background-color: rgb(199, 118, 80);
+    border-color: sienna;
+}
+
+a {
+    color: sienna;
+ }
+
+ a:hover {
+    color: darkorange; /* Change the color on hover if desired */
+ }
