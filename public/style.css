@@ -14,10 +14,13 @@ body {
     color: #fff;
 }
 
-
 .navbar-brand {
     font-size: 1.5em;
     text-align: center;
+}
+
+.navbar-toggler {
+    background-color: #28a745; /* Customize the color of the toggle button */
 }
 
 .navbar-nav {
@@ -33,7 +36,6 @@ body {
 .nav-link {
     color: #fff;
 }
-
 /* Hero Section styles */
 .jumbotron {
     background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background for better readability */
@@ -63,7 +65,8 @@ body {
 /* Responsive styles for smaller screens */
 @media (max-width: 768px) {
     .navbar-nav {
-        margin-left: 0;
+        margin-left: auto;
+        justify-content: center; /* Center items for smaller screens */
     }
 
     .nav-item {
@@ -71,4 +74,3 @@ body {
         margin-bottom: 10px;
     }
 }
-
