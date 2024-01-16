@@ -71,3 +71,8 @@ body {
         margin-bottom: 10px;
     }
 }
+
+.section img {
+    margin-bottom: 20px; /* Adjust the pixel value as needed for spacing */
+    margin-top: 20px; /* Adjust the pixel value as needed for spacing */
+}
