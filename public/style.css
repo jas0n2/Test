@@ -66,12 +66,11 @@ body {
 @media (max-width: 768px) {
     .navbar-nav {
         margin-left: auto;
-        justify-content: center; /* Center items for smaller screens */
+        justify-content: flex-end;; /* Center items for smaller screens */
     }
 
     .nav-item {
         margin-right: 0;
         margin-bottom: 10px;
-        align-items: right;
     }
 }
