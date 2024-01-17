@@ -9,9 +9,9 @@ body {
     font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
-    background-image: url('/img/bg9.jpeg'); /* Replace 'background.jpg' with your actual image filename and path */
+    background-image: url('/public/img/bg9.jpeg'); /* Replace 'background.jpg' with your actual image filename and path */
     background-size: cover;
-    color: #fff;
+    color: beige;
 }
 
 .text-right {
@@ -54,7 +54,7 @@ body {
 
 
 .nav-link {
-    color: #fff;
+    color: beige;
 }
 
 /* Hero Section styles */
@@ -83,6 +83,54 @@ body {
     text-align: center;
 }
 
+
+/* Increase space between texts and images */
+.feature-row {
+    margin-bottom: 30px; /* Adjust the pixel value as needed */
+}
+
+/* Increase space between paragraphs */
+.container p {
+    margin-bottom: 20px; /* Adjust the pixel value as needed */
+}
+
+/* Limit the maximum height of images */
+.img-fluid {
+    max-height: 300px; /* Adjust the pixel value as needed */
+}
+
+/* Style for emphasized text */
+.feature-row h2 {
+    font-size: 2em; /* Adjust the font size as needed */
+    font-weight: bold; /* Make it bold */
+    color: beige; /* Set the color to green, adjust as needed */
+}
+
+.keyf {
+        font-size: 2em; /* Adjust the font size as needed */
+        font-weight: bold; /* Make it bold */
+        color: beige; /* Set the color to green, adjust as needed */
+    }
+/* Increase text size */
+.container h2,
+.container h3,
+.container p {
+    font-size: 1.2em; /* Adjust the font size as needed */
+}
+
+/* Style for highlighted text */
+.feature-row h2 span.highlight {
+    color: #dc3545; /* Set the color to red, adjust as needed */
+}
+
+/* Increase space between sections */
+.container {
+    margin-bottom: 40px; /* Adjust the pixel value as needed */
+}
+
+/* ... Existing CSS styles ... */
+
+
 /* Responsive styles for smaller screens */
 @media (max-width: 768px) {
     .navbar-nav {
@@ -94,9 +142,10 @@ body {
         margin-right: 0;
         margin-bottom: 10px;
     }
-    
+
+
     .logo {
-    width: 115px; /* Adjust the width as needed */
-    height: auto; /* Maintain the aspect ratio */
+        width: 115px; /* Adjust the width as needed */
+        height: auto; /* Maintain the aspect ratio */
     }
 }
