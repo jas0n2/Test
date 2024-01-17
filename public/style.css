@@ -19,6 +19,14 @@ body {
     text-align: right;
 }
 
+.img-fluid mb-4 {
+    max-width: 100%; /* Adjust the percentage or pixel value as needed */
+    max-height: 300px; /* Adjust the pixel value as needed */
+    width: auto; /* Maintain the aspect ratio */
+    height: auto; /* Maintain the aspect ratio */
+}
+
+
     
 .navbar-brand {
     font-size: 1.5em;
@@ -39,9 +47,16 @@ body {
     margin-right: 20px;
 }
 
+.logo {
+    width: 50px; /* Adjust the width as needed */
+    height: auto; /* Maintain the aspect ratio */
+}
+
+
 .nav-link {
     color: #fff;
 }
+
 /* Hero Section styles */
 .jumbotron {
     background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background for better readability */
