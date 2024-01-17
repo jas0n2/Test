@@ -9,7 +9,7 @@ body {
     font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
-    background-image: url('/public/img/bg9.jpeg'); /* Replace 'background.jpg' with your actual image filename and path */
+    background-image: url('/img/bg9.jpeg'); /* Replace 'background.jpg' with your actual image filename and path */
     background-size: cover;
     color: beige;
 }
