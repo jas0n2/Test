@@ -1,20 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>  
- <title>About Inventory Xpress</title>
-     <!-- Favicons -->
-  <link href="assets/img/favicon.png" rel="icon">
-  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
- 
-  <!-- Vendor CSS Files -->
-  <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-  <link href="/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-
-    <style>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>About Inventory Xpress</title>
+        <style>
         body {
             background-color: beige;
             color: sienna;
@@ -52,169 +42,110 @@
             color: sienna;
             text-decoration: none;
         }
-
-        .team .member {
-  text-align: center;
-  margin-bottom: 20px;
-  box-shadow: 0px 0px 12px 0px rgba(0, 0, 0, 0.1);
-  padding: 30px 20px;
-  background: #fff;
-}
-
-
-
-.team .member h4 {
-  font-weight: 700;
-  margin-bottom: 2px;
-  font-size: 18px;
-}
-
-.team .member span {
-  font-style: italic;
-  display: block;
-  font-size: 13px;
-}
-
-.team .member p {
-  padding-top: 10px;
-  font-size: 14px;
-  font-style: italic;
-  color: #aaaaaa;
-}
-
-.team .member .social {
-  margin-top: 15px;
-}
-
-.team .member .social a {
-  color: #919191;
-  transition: 0.3s;
-}
-
-.team .member .social a:hover {
-  color: #cc1616;
-}
-
-.team .member .social i {
-  font-size: 18px;
-  margin: 0 2px;
-}
-
- /* Adjusted styles */
-  .team .member img {
-    max-width: 100%; /* Adjust as needed */
-    border-radius: 50%;
-    margin: 0 0 10px 0; /* Add margin to provide space between images */
-  }
-
-     
-  .about {
-    margin-bottom: 20px; /* Add margin to provide space between sections */
-  }
-
-  .team {
-    margin-top: 20px; /* Add margin to provide space between sections */
-  }
-
-  .highlight-feature {
-    font-weight: bold;
-    color: #cc1616; /* Adjust the color as needed */
-  }
-
-  .logo {
-    width: 190px; /* Adjust the width as needed */
-    height: auto; /* Maintain the aspect ratio */
-}
-
-    </style>
-
-</head>
-
-<body>
-    <!-- Header and Feature section code goes here -->
-
-    <!-- About section -->
-    <section class="about">
-        <h2 class="about-heading">About Us</h2>
-        <p>
-            Inventory Xpress is a manifestation of passion and dedication. The journey began as a personal quest to simplify product management and evolved into a collaborative effort to create a versatile and user-friendly solution. The journey began as a personal quest to simplify product management and evolved into a collaborative effort to create a versatile and user-friendly solution.
-        </p>
-
-        <p>
-            Inspired by the challenges of managing diverse inventories, our team, consisting of Dorothy Dede Quao, Trudy Bannerman-Williams, and Grace Amaning Kwarteng, embarked on a mission to develop a system that goes beyond conventional expectations. The timeline of this beta version reflects countless hours of brainstorming, coding, and refining to deliver a product management experience that exceeds expectations.
-        </p>
-
-        <p>
-            This project represents the beta version, emphasizing core features for users to explore and provide valuable feedback. Specifically, the beta version is designed to check the functionality of CRUD operations (Create, Read, Update, and Delete). As we fine-tune and enhance the system, your insights during this beta phase are crucial to shaping the future of Inventory Xpress.
-        </p>
-    </section>
-
-        <!-- ======= Team Section ======= -->
-    <section id="team" class="team">
-        <div class="container">
-          <div class="section-title">
-            <h2>Team</h2>
-          </div>
-          <div class="row">
-            <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in">
-              <div class="member">
-                <img src="team1.jpeg" alt="Dorothy Dede Quao">
-                <h4>Dorothy Dede Quao</h4>
-                <span>Frontend/Backend Developer</span>
-                <p>Entrepreneur & Alx SE student </p>
-                <div class="social">
-                  <a href=""><i class="bi bi-twitter"></i></a>
-                  <a href="https://github.com/dedeyd70" target="_blank"><i class="bi bi-github"></i></a>
-                  <a href="https://www.linkedin.com/in/dorothy-dede-quao"><i class="bi bi-linkedin"></i></a>
-  
+        
+        #team-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            padding: 20px;
+        }
+        
+        .team-member {
+            width: 300px;
+            background-color: #fff;
+            border-radius: 8px;
+            margin: 15px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .team-member img {
+            width: 100%;
+            border-radius: 50%;
+            margin-bottom: 15px;
+        }
+        
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            margin-top: 15px;
+        }
+        
+        .social-icon {
+            margin: 0 8px;
+            font-size: 20px;
+            color: #333;
+            transition: color 0.3s ease;
+        }
+        
+        .social-icon:hover {
+            color: #007bff; /* Change to your desired hover color */
+        }
+        </style>
+    </head>
+    <body>
+        <!-- Header and Feature section code goes here -->
+        <!-- About section -->
+        <section class="about">
+            <h2 class="about-heading">About Us</h2>
+            <p>
+                Inventory Xpress is a manifestation of passion and dedication. The journey began as a personal quest to simplify product management and evolved into a collaborative effort to create a versatile and user-friendly solution. The journey began as a personal quest to simplify product management and evolved into a collaborative effort to create a versatile and user-friendly solution.
+            </p>
+            <p>
+                Inspired by the challenges of managing diverse inventories, our team, consisting of Dorothy Dede Quao, Trudy Bannerman, and Grace Amaning Kwarteng, embarked on a mission to develop a system that goes beyond conventional expectations. The timeline of this beta version reflects countless hours of brainstorming, coding, and refining to deliver a product management experience that exceeds expectations.
+            </p>
+            <p>
+                This project represents the beta version, emphasizing core features for users to explore and provide valuable feedback. Specifically, the beta version is designed to check the functionality of CRUD operations (Create, Read, Update, and Delete). As we fine-tune and enhance the system, your insights during this beta phase are crucial to shaping the future of Inventory Xpress.
+            </p>
+        </section>
+        <section id="team" class="team">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Team</h2>
+                    <p>Our team at Holberton School embarked on this project with the goal of providing a user-friendly and reliable weather experience.</p>
                 </div>
-              </div>
-            </div>
-  
-            <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in">
-              <div class="member">
-                <img src="/team2.jpeg" alt="Grace Amaning-Kwarteng">
-                <h4>Grace Amaning-Kwarteng</h4>
-                <span>Frontend/Backend Developer</span>
-                <p>
-                  Entrepreneur & Alx SE Student</p>
-                <div class="social">
-                  <a href=""><i class="bi bi-twitter"></i></a>
-                  <a href="https://github.com/Im-adom"><i class="bi bi-github"></i></a>
-                  <a href="https://www.linkedin.com/in/grace-amaning-kwarteng"><i class="bi bi-linkedin"></i></a>
+                <div id="team-container">
+                    <div class="team-member">
+                        <img src="team1.jpeg" alt="Dorothy Dede Quao">
+                        <h3>Dorothy Dede Quao</h3>
+                        <span>Frontend/Backend Developer</span>
+                        <p>Entrepreneur & Alx SE Student</p>
+                        <div class="social-icons">
+                            <a href="https://github.com/dedeyd70" target="_blank" class="social-icon">&#xf099;</a>
+                            <a href="https://www.linkedin.com/in/dorothy-dede-quao" target="_blank" class="social-icon">&#xf0e1;</a>
+                        </div>
+                    </div>
+                    <div class="team-member">
+                        <img src="/team2.jpeg" alt="Grace Amaning-Kwarteng">
+                        <h3>Grace Amaning-Kwarteng</h3>
+                        <span>Frontend/Backend Developer</span>
+                        <p>Entrepreneur & Alx SE Student</p>
+                        <div class="social-icons">
+                            <a href="https://github.com/Im-adom" target="_blank" class="social-icon">&#xf099;</a>
+                            <a href="https://www.linkedin.com/in/grace-amaning-kwarteng" target="_blank" class="social-icon">&#xf0e1;</a>
+                        </div>
+                    </div>
+                    <div class="team-member">
+                        <img src="/team3.jpeg" alt="Trudy Bannerman-Williams">
+                        <h3>Trudy Bannerman-Williams</h3>
+                        <span>Frontend/Backend Developer</span>
+                        <p>Entrepreneur & Alx SE Student</p>
+                        <div class="social-icons">
+                            <a href="https://github.com/TrudyB-T" target="_blank" class="social-icon">&#xf099;</a>
+                            <a href="https://www.linkedin.com/in/trudy-bannerman-williams-81a6ba24a"  target="_blank" class="social-icon">&#xf0e1;</a>
+                        </div>
+                    </div>
                 </div>
-              </div>
             </div>
-  
-            <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in">
-              <div class="member">
-                <img src="/team3.jpeg" alt="Trudy Bannerman-Williams">
-                <h4>Trudy Bannerman-Williams</h4>
-                <span>Frontend/Backend Developer</span>
-                <p>
-                  Entrepreneur & Alx SE Student
-                </p>
-                <div class="social">
-                  <a href=""><i class="bi bi-twitter"></i></a>
-                  <a href="https://github.com/TrudyB-T"><i class="bi bi-github"></i></a>
-                  <a href="https://www.linkedin.com/in/trudy-bannerman-williams-81a6ba24a"><i class="bi bi-linkedin"></i></a>
-                </div>
-              </div>
-            </div>
-  
-          </div>
-  
-        </div>
-      </section><!-- End Team Section -->
-      
-      <footer><!-- GitHub Repository Link -->
-        <section>
-        <h3>Project Repository</h3>
-        <p>Explore the source code on GitHub:</p>
-        <a href="https://github.com/Im-adom/Inventory_Xpress" target="_blank" class="btn">GitHub Repository</a>
-    </section>
-    <h6 class="fs-6 fw-bold">&copy; 2024 Inventory Xpress</h6>
-    <img src="InventoryXpresslogo.png" class="logo">
-    </footer>
-</body>
+        </section><!-- End Team Section -->
+        <footer><!-- GitHub Repository Link -->
+            <section>
+                <h3>Project Repository</h3>
+                <p>Explore the source code on GitHub:</p>
+                <a href="https://github.com/Im-adom/Inventory_Xpress" target="_blank" class="btn">GitHub Repository</a>
+            </section>
+            <h6 class="fs-6 fw-bold">&copy; 2024 Inventory Xpress</h6>
+            <img src="InventoryXpresslogo.png">
+        </footer>
+    </body>
 </html>
