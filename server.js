@@ -1,70 +1,210 @@
 const express = require('express');
+const session = require('express-session');
 const bodyParser = require('body-parser');
+const bcrypt = require('bcrypt');
 const knex = require('knex');
 const knexConfig = require('./knexfile');
+const path = require('path');
+const cryptoRandomString = import('crypto-random-string').then(module => module.default);
+
+
+require('dotenv').config();
+const secretKey = process.env.SESSION_SECRET || 'default-secret-key';
+
 
 const app = express();
 const PORT = 3000;
 
-// Connect to the SQLite database using Knex
 const db = knex(knexConfig);
 
-// Middleware to parse JSON and urlencoded data
+db.raw('SELECT 1')
+  .then(() => {
+    console.log('Database connection successful');
+  })
+  .catch((error) => {
+    console.error('Error connecting to the database:', error);
+    process.exit(1); // Exit the application if the database connection fails
+  });
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// Serve static files (like your index.html)
+// Configure express-session
+app.use(session({
+  secret: process.env.SESSION_SECRET || 'default-secret-key',
+  resave: false,
+  saveUninitialized: true,
+}));
+
 app.use(express.static('public'));
 app.use('/css', express.static('css'));
 app.use('/js', express.static('js'));
 
-// Root route
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send('Internal Server Error');
+});
+
+
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/index.html');
 });
 
-// Dashboard route
-app.get('/dashboard', (req, res) => {
-  res.sendFile(__dirname + '/dashboard.html');
+app.get('/dashboard', async (req, res) => {
+  const userId = req.session.userId;
+
+  if (!userId) {
+    return res.redirect('/login'); // Redirect to login if not authenticated
+  }
+
+  try {
+    // Fetch user data
+    const user = await db('users').where('id', userId).first();
+
+    // Fetch products associated with the user
+    const products = await db('products').where('user_id', userId);
+
+    // Send user and product data as JSON to the client
+    res.json({ user, products });
+  } catch (error) {
+    console.error('Error fetching user data:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
 });
 
-// style route
+
 app.get('/style.css', function(req, res) {
   res.header("Content-Type", "text/css");
   res.sendFile(__dirname + '/public/style.css');
 });
 
+
+// Create the 'users' table if it doesn't exist
+const createUserTableQuery = `
+  CREATE TABLE IF NOT EXISTS users (
+    id INTEGER PRIMARY KEY,
+    name TEXT,
+    email TEXT UNIQUE,
+    password TEXT
+  )
+`;
+
 // Create the 'products' table if it doesn't exist
-const createTableQuery = `
+const createProductsTableQuery = `
   CREATE TABLE IF NOT EXISTS products (
     id INTEGER PRIMARY KEY,
     name TEXT,
     price DECIMAL(10, 2),
     cate TEXT,
     desc TEXT,
-    quant INTEGER
+    quant INTEGER,
+    user_id INTEGER,
+    FOREIGN KEY (user_id) REFERENCES users(id)
   )
 `;
 
-// Run the migration
-db.raw(createTableQuery)
+// Run the migrations
+db.raw(createUserTableQuery)
   .then(() => {
-    console.log('Table checked/created');
-    console.log(`Server is ready, check http://localhost:${PORT}`);
+    console.log('Users table checked/created');
+    return db.raw(createProductsTableQuery);
+  })
+  .then(() => {
+    console.log('Products table checked/created');
   })
   .catch((err) => {
-    console.error('Error creating table:', err);
+    console.error('Error creating tables:', err);
   });
 
+// Registration route
+app.get('/register', (req, res) => {
+  res.sendFile(__dirname + '/register.html');
+});
+
+app.post('/register-user', async (req, res) => {
+  const { name, email, password } = req.body;
+
+  try {
+    // Hash the password before storing it in the database
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    // Insert the user into the database
+    const [userId] = await db('users').insert({
+      name,
+      email,
+      password: hashedPassword
+    });
+
+ // Log the user object for inspection
+ console.log('User Object:', JSON.stringify({ userId, name, email }, null, 2));   
+
+ // Send a success response with a message and redirect URL
+ res.json({
+  success: true,
+  message: 'Successfully registered. Redirecting to login page...',
+  redirectURL: './login.html'
+});
+} catch (error) {
+console.error('Error during registration:', error);
+res.status(500).json({ error: 'Internal Server Error' });
+}
+});
+
+
+
+
+// Login route
+app.get('/login', (req, res) => {
+  res.sendFile(__dirname + '/login.html');
+});
+
+app.post('/login-user', async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    // Retrieve the user from the database by email
+    const user = await db('users').where('email', email).first();
+
+    if (user) {
+      // Compare the provided password with the hashed password from the database
+      const passwordMatch = await bcrypt.compare(password, user.password);
+
+      if (passwordMatch) {
+         // Store the user ID in the session
+         req.session.userId = user.id;
+
+
+        // Include the login URL in the response
+        res.json({ success: true, redirectURL: '/dashboard' });
+      } else {
+        res.status(401).json({ error: 'Invalid email or password' });
+      }
+    } else {
+      res.status(401).json({ error: 'Invalid email or password' });
+    }
+  } catch (error) {
+    console.error('Error during login:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+
+
+
 // API endpoint to get products
+// Example endpoint to get products for the logged-in user
 app.get('/api/products', (req, res) => {
-  db('products').select('*')
+  const userId = req.user.id; // Assuming you have user information in req.user
+  db('products')
+    .where({ user_id: userId })
+    .select('*')
     .then((results) => res.json(results))
     .catch((err) => {
       console.error('Error getting products:', err);
       res.status(500).send('Internal Server Error');
     });
 });
+
 
 
 // API endpoint to add a product
@@ -75,6 +215,12 @@ app.post('/api/products', (req, res) => {
   if (!newProduct || !newProduct.name || !newProduct.price || !newProduct.cate || !newProduct.desc || !newProduct.quant) {
     return res.status(400).json({ error: 'Invalid input' });
   }
+
+   // Assuming you have user authentication middleware that sets req.user
+   const userId = req.session.userId;
+
+   // Add user_id to the new product
+   newProduct.user_id = userId;
 
   db('products').insert(newProduct)
     .then(() => res.json(newProduct))

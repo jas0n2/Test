@@ -78,6 +78,7 @@ updateBtn.on('click', function () {
 
 // Function to make an AJAX request to add a product
 function addProduct(product) {
+    product.user_id = currentUser.id; // Assuming you have user information in currentUser
     $.ajax({
         url: '/api/products',
         method: 'POST',
@@ -94,6 +95,7 @@ function addProduct(product) {
 
 // Function to make an AJAX request to update a product
 function updateProduct(index, product) {
+    product.user_id = currentUser.id; // Assuming you have user information in currentUser
     console.log('Updating product:', index, product);
     $.ajax({
         url: `/api/products/${index + 1}`, // Assuming your API uses 1-based index
@@ -282,6 +284,19 @@ function validProductQuant() {
         return false;
     }
 }
+
+// Update fetchProducts function to include user information
+function fetchProducts() {
+    $.ajax({
+      url: '/api/products',
+      method: 'GET',
+      success: function (data) {
+        products = data;
+        displayProduct();
+      },
+    });
+  }
+  
 
 function isProductExist() {
     var inputName = productNameInp.val().toLowerCase();
