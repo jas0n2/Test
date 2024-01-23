@@ -220,15 +220,27 @@ app.post('/api/products', (req, res) => {
 });
 
 // API endpoint to update a product
-app.post('/api/products/:id',  (req, res) => {
+app.put('/api/products/:id',  async (req, res) => {
   const productId = req.params.id;
   const updatedProduct = req.body;
+  const {id} = req.params;
+
+  const changes = req.body;
 
   // Check for existing product with the same name and category
-db("products")
-.update({name: "Hlell"})
-.where("id", "1");
 
+ try {
+    const count = await db('posts').where({id}).update(changes);
+    if (count) {
+      res.status(200).json({updated: count})
+    } else {
+      res.status(404).json({message: "Record not found"})
+    }
+  } catch (err) {
+    res.status(500).json({message: "Error updating new post", error: err})
+  }
+
+  
   
   db('products').select('*').where('name', updatedProduct.name).where('cate', updatedProduct.cate).whereNot('id', productId)
     .then((results) => {
