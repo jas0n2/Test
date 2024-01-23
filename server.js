@@ -232,47 +232,34 @@ app.put('/api/products/:id',  async (req, res) => {
           desc: updatedProduct.desc,
           quant: updatedProduct.quant
         };
-   db('products')
-  .update({name: "ceaser"})
-  .where({id: 1})
-  .catch((err) => console.log(err));
- // db('products')
- //  .where('id',1)
- //  .update(updateData)
- //  .then((updatedRows) => {
- //    console.log(`Updated ${updatedRows} rows successfully`);
- //  })
- //  .catch((error) => {
- //    console.error('Error updating record:', error);
- //  });
-  
-  
-  // db('products').select('*').where('name', updatedProduct.name).where('cate', updatedProduct.cate).whereNot('id', productId)
-  //   .then((results) => {
-  //     if (results.length > 0) {
-  //       // Product with the same name and category already exists
-  //       res.status(400).json({ error: 'Product with the same name and category already exists' });
-  //     } else {
-  //       console.log('ss')
-  //       // No conflict, proceed with the update
-  //        db('products').where('id', 1).update({
-  //         name: updatedProduct.name,
-  //         price: updatedProduct.price,
-  //         cate: updatedProduct.cate,
-  //         desc: updatedProduct.desc,
-  //         quant: updatedProduct.quant
-  //       })
-  //       .then(() => res.json(productId))
-  //       .catch((err) => {
-  //         console.error('Error updating product:', err);
-  //         res.status(500).send('Internal Server Error');
-  //       });
-  //     }
-  //   })
-  //   .catch((err) => {
-  //     console.error('Error checking for existing product:', err);
-  //     res.status(500).send('Internal Server Error');
-  //   });
+ 
+ 
+  db('products').select('*').where('name', updatedProduct.name).where('cate', updatedProduct.cate).whereNot('id', productId)
+    .then((results) => {
+      if (results.length > 0) {
+        // Product with the same name and category already exists
+        res.status(400).json({ error: 'Product with the same name and category already exists' });
+      } else {
+        console.log('ss')
+        // No conflict, proceed with the update
+         await db('products').where('id', 1).update({
+          name: updatedProduct.name,
+          price: updatedProduct.price,
+          cate: updatedProduct.cate,
+          desc: updatedProduct.desc,
+          quant: updatedProduct.quant
+        })
+        .then(() => res.json(productId))
+        .catch((err) => {
+          console.error('Error updating product:', err);
+          res.status(500).send('Internal Server Error');
+        });
+      }
+    })
+    .catch((err) => {
+      console.error('Error checking for existing product:', err);
+      res.status(500).send('Internal Server Error');
+    });
 });
 
 
