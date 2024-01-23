@@ -184,7 +184,7 @@ app.post('/login-user', async (req, res) => {
 
 
 // API endpoint to get products
-app.get('/api/products', async (req, res) => {
+app.get('/api/products',  (req, res) => {
    const userId = req.session.userId;
 
   db('products').select('*').where('user_id', userId)
@@ -211,7 +211,7 @@ app.post('/api/products', (req, res) => {
    // Add user_id to the new product
    newProduct.user_id = userId;
 
-  await db('products').insert(newProduct)
+   db('products').insert(newProduct)
     .then(() => res.json(newProduct))
     .catch((err) => {
       console.error('Error adding product:', err);
@@ -220,13 +220,13 @@ app.post('/api/products', (req, res) => {
 });
 
 // API endpoint to update a product
-app.put('/api/products/:id', (req, res) => {
+app.put('/api/products/:id', async (req, res) => {
   const productId = req.params.id;
   const updatedProduct = req.body;
 
   // Check for existing product with the same name and category
  
-  db('products').where('id', productId).update({
+  await db('products').where('id', productId).update({
           name: updatedProduct.name,
           price: updatedProduct.price,
           cate: updatedProduct.cate,
