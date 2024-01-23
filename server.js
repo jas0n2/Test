@@ -222,7 +222,7 @@ app.post('/api/products', (req, res) => {
 
 
 // API endpoint to update a product
-app.put('/api/products/:id',  async (req, res) => {
+app.put('/api/products/:id',   (req, res) => {
   const productId = req.params.id;
   const updatedProduct = req.body;
   const updateData = {
@@ -242,7 +242,7 @@ app.put('/api/products/:id',  async (req, res) => {
       } else {
         console.log('ss')
         // No conflict, proceed with the update
-         await db('products').where('id', 1).update({
+          db('products').where('id', 1).update({
           name: updatedProduct.name,
           price: updatedProduct.price,
           cate: updatedProduct.cate,
