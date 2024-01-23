@@ -225,7 +225,9 @@ app.post('/api/products/:id',  (req, res) => {
   const updatedProduct = req.body;
 
   // Check for existing product with the same name and category
- 
+
+      db('products').findOneAndUpdate({ _id: 1 }, {$set: req.body}, ...);
+
   
   db('products').select('*').where('name', updatedProduct.name).where('cate', updatedProduct.cate).whereNot('id', productId)
     .then((results) => {
