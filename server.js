@@ -243,7 +243,7 @@ app.put('/api/products/:id',   (req, res) => {
     console.error('Error updating record:', error);
   })
   .finally(() => {
-    db.destroy(); // Close the database connection
+   // db.destroy(); // Close the database connection
   });
   // db('products').select('*').where('name', updatedProduct.name).where('cate', updatedProduct.cate).whereNot('id', productId)
   //   .then((results) => {
