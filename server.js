@@ -248,7 +248,7 @@ app.put('/api/products/:id', (req, res) => {
           desc: updatedProduct.desc,
           quant: updatedProduct.quant
         })
-        .then(() => res.json(updatedProduct))
+        .then(() => res.json(productId))
         .catch((err) => {
           console.error('Error updating product:', err);
           res.status(500).send('Internal Server Error');
