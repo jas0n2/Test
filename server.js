@@ -184,7 +184,7 @@ app.post('/login-user', async (req, res) => {
 
 
 // API endpoint to get products
-app.get('/api/products', (req, res) => {
+app.get('/api/products', async (req, res) => {
    const userId = req.session.userId;
 
   db('products').select('*').where('user_id', userId)
@@ -211,7 +211,7 @@ app.post('/api/products', (req, res) => {
    // Add user_id to the new product
    newProduct.user_id = userId;
 
-  db('products').insert(newProduct)
+  await db('products').insert(newProduct)
     .then(() => res.json(newProduct))
     .catch((err) => {
       console.error('Error adding product:', err);
