@@ -233,18 +233,34 @@ app.put('/api/products/:id',   (req, res) => {
           quant: updatedProduct.quant
         };
  const recordIdToUpdate = 1; 
- db('products')
-  .where({ id: recordIdToUpdate })
-  .update(updateData)
-  .then((updatedRows) => {
-    console.log(`Updated ${updatedRows} rows successfully`);
-  })
-  .catch((error) => {
-    console.error('Error updating record:', error);
-  })
-  .finally(() => {
-   // db.destroy(); // Close the database connection
-  });
+  db.transaction((trx) => {
+  db("products")
+    .transacting(trx)
+    .where({ id: productId })
+    .update(updateData)
+    .then(trx.commit)
+    .catch(trx.rollback);
+})
+.then(() => {
+  console.log('Transaction complete.');
+})
+.catch((error) => {
+  console.error('Transaction failed:', error);
+})
+
+  
+ // db('products')
+ //  .where({ id: recordIdToUpdate })
+ //  .update(updateData)
+ //  .then((updatedRows) => {
+ //    console.log(`Updated ${updatedRows} rows successfully`);
+ //  })
+ //  .catch((error) => {
+ //    console.error('Error updating record:', error);
+ //  })
+ //  .finally(() => {
+ //   // db.destroy(); // Close the database connection
+ //  });
   // db('products').select('*').where('name', updatedProduct.name).where('cate', updatedProduct.cate).whereNot('id', productId)
   //   .then((results) => {
   //     if (results.length > 0) {
