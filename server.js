@@ -233,7 +233,7 @@ app.put('/api/products/:id',   (req, res) => {
           quant: updatedProduct.quant
         };
  const recordIdToUpdate = 1; 
- db('products)
+ db('products')
   .where({ id: recordIdToUpdate })
   .update(updateData)
   .then((updatedRows) => {
