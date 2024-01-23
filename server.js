@@ -231,7 +231,7 @@ app.put('/api/products/:id',  async (req, res) => {
           quant: updatedProduct.quant
         };
  db('products')
-  .where({ id: 1 })
+  .where('d',1)
   .update(updateData)
   .then((updatedRows) => {
     console.log(`Updated ${updatedRows} rows successfully`);
