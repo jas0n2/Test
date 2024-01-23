@@ -1,3 +1,4 @@
+// importing libraies that we installed using npm
 const express = require('express');
 const session = require('express-session');
 const bodyParser = require('body-parser');
@@ -5,7 +6,7 @@ const bcrypt = require('bcrypt');
 const knex = require('knex');
 const knexConfig = require('./knexfile');
 const path = require('path');
-const cryptoRandomString = import('crypto-random-string').then(module => module.default);
+const cryptoRandomString = require('crypto-random-string');
 
 
 require('dotenv').config();
@@ -15,6 +16,7 @@ const secretKey = process.env.SESSION_SECRET || 'default-secret-key';
 const app = express();
 const PORT = 3000;
 
+// database configuration
 const db = knex(knexConfig);
 
 db.raw('SELECT 1')
@@ -45,33 +47,14 @@ app.use((err, req, res, next) => {
   res.status(500).send('Internal Server Error');
 });
 
-
+// Routes
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/index.html');
 });
 
-app.get('/dashboard', async (req, res) => {
-  const userId = req.session.userId;
-
-  if (!userId) {
-    return res.redirect('/login'); // Redirect to login if not authenticated
-  }
-
-  try {
-    // Fetch user data
-    const user = await db('users').where('id', userId).first();
-
-    // Fetch products associated with the user
-    const products = await db('products').where('user_id', userId);
-
-    // Send user and product data as JSON to the client
-    res.json({ user, products });
-  } catch (error) {
-    console.error('Error fetching user data:', error);
-    res.status(500).json({ error: 'Internal Server Error' });
-  }
+app.get('/dashboard', (req, res) => {
+  res.sendFile(__dirname + '/dashboard.html');
 });
-
 
 app.get('/style.css', function(req, res) {
   res.header("Content-Type", "text/css");
@@ -116,6 +99,19 @@ db.raw(createUserTableQuery)
     console.error('Error creating tables:', err);
   });
 
+
+  app.get('/logout', (req, res) => {
+    // Perform any necessary cleanup (e.g., destroying the session)
+    req.session.destroy((err) => {
+      if (err) {
+        console.error('Error during logout:', err);
+      }
+      // Redirect to the home page after logout
+      res.redirect('/index.html');
+    });
+  });
+
+
 // Registration route
 app.get('/register', (req, res) => {
   res.sendFile(__dirname + '/register.html');
@@ -149,8 +145,6 @@ console.error('Error during registration:', error);
 res.status(500).json({ error: 'Internal Server Error' });
 }
 });
-
-
 
 
 // Login route
@@ -189,22 +183,15 @@ app.post('/login-user', async (req, res) => {
 });
 
 
-
-
 // API endpoint to get products
-// Example endpoint to get products for the logged-in user
 app.get('/api/products', (req, res) => {
-  const userId = req.user.id; // Assuming you have user information in req.user
-  db('products')
-    .where({ user_id: userId })
-    .select('*')
+  db('products').select('*')
     .then((results) => res.json(results))
     .catch((err) => {
       console.error('Error getting products:', err);
       res.status(500).send('Internal Server Error');
     });
 });
-
 
 
 // API endpoint to add a product

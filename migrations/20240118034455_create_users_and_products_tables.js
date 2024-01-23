@@ -1,4 +1,3 @@
-
 /**
  * @param { import("knex").Knex } knex
  * @returns { Promise<void> }
@@ -7,8 +6,8 @@ exports.up = function(knex) {
     return knex.schema
       .createTable('users', function (table) {
         table.increments('id').primary();
-        table.string('name').unique(); // Add unique constraint to 'name'
-        table.string('email').unique(); // Add unique constraint to 'email'
+        table.string('name');
+        table.string('email');
         table.string('password');
         // Add other columns as needed
       })
@@ -34,3 +33,4 @@ exports.up = function(knex) {
       .dropTableIfExists('products')
       .dropTableIfExists('users');
   };
+  
