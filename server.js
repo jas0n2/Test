@@ -226,13 +226,7 @@ app.put('/api/products/:id', async (req, res) => {
 
   // Check for existing product with the same name and category
  
-  await db('products').where('id', productId).update({
-          name: updatedProduct.name,
-          price: updatedProduct.price,
-          cate: updatedProduct.cate,
-          desc: updatedProduct.desc,
-          quant: updatedProduct.quant
-        })
+  
   db('products').select('*').where('name', updatedProduct.name).where('cate', updatedProduct.cate).whereNot('id', productId)
     .then((results) => {
       if (results.length > 0) {
@@ -241,13 +235,7 @@ app.put('/api/products/:id', async (req, res) => {
       } else {
         console.log('ss')
         // No conflict, proceed with the update
-        db('products').where('id', productId).update({
-          name: updatedProduct.name,
-          price: updatedProduct.price,
-          cate: updatedProduct.cate,
-          desc: updatedProduct.desc,
-          quant: updatedProduct.quant
-        })
+        await db('products').where('id', productId).del()
         .then(() => res.json(productId))
         .catch((err) => {
           console.error('Error updating product:', err);
