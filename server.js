@@ -225,6 +225,14 @@ app.put('/api/products/:id', (req, res) => {
   const updatedProduct = req.body;
 
   // Check for existing product with the same name and category
+ 
+  db('products').where('id', productId).update({
+          name: updatedProduct.name,
+          price: updatedProduct.price,
+          cate: updatedProduct.cate,
+          desc: updatedProduct.desc,
+          quant: updatedProduct.quant
+        })
   db('products').select('*').where('name', updatedProduct.name).where('cate', updatedProduct.cate).whereNot('id', productId)
     .then((results) => {
       if (results.length > 0) {
