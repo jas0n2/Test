@@ -97,7 +97,7 @@ function updateProduct(index, product) {
     console.log('Updating product:', index, product);
     $.ajax({
         url: `/api/products/${index + 1}`, // Assuming your API uses 1-based index
-        method: 'POST',
+        method: 'PUT',
         contentType: 'application/json',
         data: JSON.stringify(product),
         success: function (data) {
