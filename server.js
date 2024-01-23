@@ -235,7 +235,13 @@ app.put('/api/products/:id', async (req, res) => {
       } else {
         console.log('ss')
         // No conflict, proceed with the update
-        await db('products').where('id', productId).del()
+        await db('products').where('id', 1).update({
+          name: updatedProduct.name,
+          price: updatedProduct.price,
+          cate: updatedProduct.cate,
+          desc: updatedProduct.desc,
+          quant: updatedProduct.quant
+        })
         .then(() => res.json(productId))
         .catch((err) => {
           console.error('Error updating product:', err);
