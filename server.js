@@ -220,7 +220,7 @@ app.post('/api/products', (req, res) => {
 });
 
 // API endpoint to update a product
-app.put('/api/products/:id',  (req, res) => {
+app.post('/api/products/:id',  (req, res) => {
   const productId = req.params.id;
   const updatedProduct = req.body;
 
