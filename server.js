@@ -219,6 +219,8 @@ app.post('/api/products', (req, res) => {
     });
 });
 
+
+
 // API endpoint to update a product
 app.put('/api/products/:id',  async (req, res) => {
   const productId = req.params.id;
@@ -230,15 +232,19 @@ app.put('/api/products/:id',  async (req, res) => {
           desc: updatedProduct.desc,
           quant: updatedProduct.quant
         };
- db('products')
-  .where('id',1)
-  .update(updateData)
-  .then((updatedRows) => {
-    console.log(`Updated ${updatedRows} rows successfully`);
-  })
-  .catch((error) => {
-    console.error('Error updating record:', error);
-  });
+   db('products')
+  .update({name: "ceaser"})
+  .where({id: 1})
+  .catch((err) => console.log(err));
+ // db('products')
+ //  .where('id',1)
+ //  .update(updateData)
+ //  .then((updatedRows) => {
+ //    console.log(`Updated ${updatedRows} rows successfully`);
+ //  })
+ //  .catch((error) => {
+ //    console.error('Error updating record:', error);
+ //  });
   
   
   // db('products').select('*').where('name', updatedProduct.name).where('cate', updatedProduct.cate).whereNot('id', productId)
