@@ -231,6 +231,7 @@ app.put('/api/products/:id', (req, res) => {
         // Product with the same name and category already exists
         res.status(400).json({ error: 'Product with the same name and category already exists' });
       } else {
+        console.log('ss')
         // No conflict, proceed with the update
         db('products').where('id', productId).update({
           name: updatedProduct.name,
