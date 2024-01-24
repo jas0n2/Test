@@ -222,7 +222,7 @@ app.post('/api/products', (req, res) => {
 
 
 // API endpoint to update a product
-app.put('/api/products/:id', (req, res) => {
+app.put('/api/products/:id', sync (req, res) => {
   const productId = req.params.id;
   const updatedProduct = req.body;
 
@@ -234,7 +234,7 @@ app.put('/api/products/:id', (req, res) => {
         res.status(400).json({ error: 'Product with the same name and category already exists' });
       } else {
         // No conflict, proceed with the update
-        db('products').where('id', productId).update({
+        await db('products').where('id', productId).update({
           name: updatedProduct.name,
           price: updatedProduct.price,
           cate: updatedProduct.cate,
