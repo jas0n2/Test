@@ -224,8 +224,11 @@ app.post('/api/products', (req, res) => {
 // API endpoint to update a product
 app.put('/api/products/:id', async (req, res) => {
   const productId = req.params.id;
+ {
+  const id = req.params.id;
+  
   const updatedProduct = req.body;
-const count = await db('products').where({productId}).update(updatedProduct);
+const count = await db('products').where({id}).update(updatedProduct);
   // Check for existing product with the same name and category
   db('products').select('*').where('name', updatedProduct.name).where('cate', updatedProduct.cate).whereNot('id', productId)
     .then((results) => {
