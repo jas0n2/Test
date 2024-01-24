@@ -222,72 +222,37 @@ app.post('/api/products', (req, res) => {
 
 
 // API endpoint to update a product
-app.put('/api/products/:id',   (req, res) => {
+app.put('/api/products/:id', (req, res) => {
   const productId = req.params.id;
   const updatedProduct = req.body;
-  const updateData = {
+
+  // Check for existing product with the same name and category
+  db('products').select('*').where('name', updatedProduct.name).where('cate', updatedProduct.cate).whereNot('id', productId)
+    .then((results) => {
+      if (results.length > 0) {
+        // Product with the same name and category already exists
+        res.status(400).json({ error: 'Product with the same name and category already exists' });
+      } else {
+        // No conflict, proceed with the update
+        db('products').where('id', productId).update({
           name: updatedProduct.name,
           price: updatedProduct.price,
           cate: updatedProduct.cate,
           desc: updatedProduct.desc,
           quant: updatedProduct.quant
-        };
- const recordIdToUpdate = 1; 
-  db.transaction((trx) => {
-  db("products")
-    .transacting(trx)
-    .where({ id: productId })
-    .update(updateData)
-    .then(trx.commit)
-    .catch(trx.rollback);
+        })
+        .then(() => res.json(updatedProduct))
+        .catch((err) => {
+          console.error('Error updating product:', err);
+          res.status(500).send('Internal Server Error');
+        });
+      }
+    })
+    .catch((err) => {
+      console.error('Error checking for existing product:', err);
+      res.status(500).send('Internal Server Error');
+    });
 })
-.then(() => {
-  console.log('Transaction complete.');
-})
-.catch((error) => {
-  console.error('Transaction failed:', error);
-})
-
-  
- // db('products')
- //  .where({ id: recordIdToUpdate })
- //  .update(updateData)
- //  .then((updatedRows) => {
- //    console.log(`Updated ${updatedRows} rows successfully`);
- //  })
- //  .catch((error) => {
- //    console.error('Error updating record:', error);
- //  })
- //  .finally(() => {
- //   // db.destroy(); // Close the database connection
- //  });
-  // db('products').select('*').where('name', updatedProduct.name).where('cate', updatedProduct.cate).whereNot('id', productId)
-  //   .then((results) => {
-  //     if (results.length > 0) {
-  //       // Product with the same name and category already exists
-  //       res.status(400).json({ error: 'Product with the same name and category already exists' });
-  //     } else {
-  //       console.log('ss')
-  //       // No conflict, proceed with the update
-  //         db('products').where('id', 1).update({
-  //         name: updatedProduct.name,
-  //         price: updatedProduct.price,
-  //         cate: updatedProduct.cate,
-  //         desc: updatedProduct.desc,
-  //         quant: updatedProduct.quant
-  //       })
-        
-  //       .catch((err) => {
-  //         console.error('Error updating product:', err);
-  //         res.status(500).send('Internal Server Error');
-  //       });
-  //     }
-  //   })
-  //   .catch((err) => {
-  //     console.error('Error checking for existing product:', err);
-  //     res.status(500).send('Internal Server Error');
-  //   });
-});
 
 
 // API endpoint to delete a product
