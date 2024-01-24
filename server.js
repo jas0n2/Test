@@ -222,7 +222,7 @@ app.post('/api/products', (req, res) => {
 
 
 // API endpoint to update a product
-app.put('/api/products/:id',  (req, res) => {
+app.put('/api/products/:id', async (req, res) => {
   const productId = req.params.id;
   const updatedProduct = req.body;
   const userId = req.session.userId;
