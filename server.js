@@ -229,32 +229,14 @@ app.put('/api/products/:id', async (req, res) => {
   
   const updatedProduct = req.body;
 const count = await db('products').where({id}).update(updatedProduct);
-  // Check for existing product with the same name and category
-  db('products').select('*').where('name', updatedProduct.name).where('cate', updatedProduct.cate).whereNot('id', productId)
-    .then((results) => {
-      if (results.length > 0) {
-        // Product with the same name and category already exists
-        res.status(400).json({ error: 'Product with the same name and category already exists' });
-      } else {
-        // No conflict, proceed with the update
-        db('products').where('id', productId).update({
-          name: updatedProduct.name,
-          price: updatedProduct.price,
-          cate: updatedProduct.cate,
-          desc: updatedProduct.desc,
-          quant: updatedProduct.quant
-        })
-        .then(() => res.json(updatedProduct))
-        .catch((err) => {
-          console.error('Error updating product:', err);
-          res.status(500).send('Internal Server Error');
-        });
-      }
-    })
-    .catch((err) => {
-      console.error('Error checking for existing product:', err);
-      res.status(500).send('Internal Server Error');
-    });
+  // Check for existing product with the same name and 
+  if (count) {
+    console.log('upsa product with ID:');
+  res.status(200).json({updated: count})
+} else {
+    console.log('Deleting product with ID:');
+  res.status(404).json({message: "Record not found"})
+}
 })
 
 
