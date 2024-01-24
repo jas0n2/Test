@@ -225,7 +225,7 @@ app.post('/api/products', (req, res) => {
 app.put('/api/products/:id', async (req, res) => {
   const productId = req.params.id;
   const updatedProduct = req.body;
-
+const count = await db('products').where({id}).update(updatedProduct);
   // Check for existing product with the same name and category
   db('products').select('*').where('name', updatedProduct.name).where('cate', updatedProduct.cate).whereNot('id', productId)
     .then((results) => {
@@ -234,7 +234,7 @@ app.put('/api/products/:id', async (req, res) => {
         res.status(400).json({ error: 'Product with the same name and category already exists' });
       } else {
         // No conflict, proceed with the update
-        await db('products').where('id', productId).update({
+        db('products').where('id', productId).update({
           name: updatedProduct.name,
           price: updatedProduct.price,
           cate: updatedProduct.cate,
