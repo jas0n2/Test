@@ -187,7 +187,7 @@ app.post('/login-user', async (req, res) => {
 app.get('/api/products',  (req, res) => {
    const userId = req.session.userId;
 
-  db('products').select('*').where('user_id', userId)
+  db('products').select('*')
     .then((results) => res.json(results))
     .catch((err) => {
       console.error('Error getting products:', err);
